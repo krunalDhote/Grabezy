@@ -1,0 +1,103 @@
+ {% extends 'basic.html' %} {% block title %} Home |{% endblock title %} {% block css %}
+<style>
+    @media screen and (max-width: 700px) {
+        .carauselImage {
+            height: 400px;
+        }
+        .headEle {
+            color: yellow;
+            font-weight: bold;
+        }
+    }
+</style>
+{% endblock css %} {% block script %}{% endblock script %} {% block body %}
+
+
+
+<div class="container">
+    <h1 style="color: rgb(11, 11, 66);background: transparent;font-size: 97px;font-family: cursive;" align='center'>Grabezy</h1>
+</div>
+
+<div class="container text-center pt-lg-3">
+    <div class="row">
+        <div class="col-lg-4">
+            <img src="https://source.unsplash.com/140x140/?electronics" class="bd-placeholder-img rounded-circle" width="140" height="140">
+
+            <h2>Electronics</h2>
+            <p>Grab the latest electronic items with the best disscount.Buy here all basic electronic items.</p>
+            <p><a class="btn btn-outline-primary" href="/electronics">View details »</a></p>
+        </div>
+        <!-- /.col-lg-4 -->
+        <div class="col-lg-4">
+            <img src="https://source.unsplash.com/140x140/?grocery" class="bd-placeholder-img rounded-circle" width="140" height="140">
+
+            <h2>Grocery</h2>
+            <p>Grab Grocery Offers to get Rs 200 Cashback on food items, beverages, baby Products and more.</p>
+            <p><a class="btn btn-outline-primary" href="/grocery">View details »</a></p>
+        </div>
+        <!-- /.col-lg-4 -->
+        <div class="col-lg-4">
+            <img src="https://source.unsplash.com/140x140/?fashion,girl,boy" class="bd-placeholder-img rounded-circle" width="140" height="140">
+
+            <h2>Fashion</h2>
+            <p>Grab exciting cash back offers and extra discounts on Men and Women Fashion clothing brands.</p>
+            <p><a class="btn btn-outline-primary" href="/fashion">View details »</a></p>
+        </div>
+        <!-- /.col-lg-4 -->
+    </div>
+</div>
+
+
+<div class="container-fluid p-4">
+    <div id="carouselExampleControls" class="carousel slide" data-bs-ride="carousel">
+        <div class="carousel-inner">
+            <div class="carousel-item active">
+                <img src="/static/images/front1.jpg" class="d-block w-100  rounded-2 carauselImage" alt="..." height="800px">
+                <div class="carousel-caption d-block" style="color: #060b29;">
+                    <a href="/fashion" class="btn btn-danger  text-uppercase mt-4">Buy Now</a>
+                </div>
+            </div>
+            <div class="carousel-item">
+                <img src="/static/images/front2.jpg" class="d-block w-100 carauselImage" alt="..." height="800px">
+                <div class="carousel-caption d-block" style="color: #ff0d2d;">
+                    <h1 class="headEle">Trending !! 30% Discount on Electronic Items</h1>
+                    <a href="/electronics" class="btn btn-danger  text-uppercase mt-4">Buy Now</a>
+                </div>
+            </div>
+            <div class="carousel-item">
+                <img src="/static/images/front3.jpg" class="d-block w-100 carauselImage" alt="..." height="800px">
+                <div class="carousel-caption d-block" style="color: #ffffff;">
+                    <h1>12% Discount on Grocery</h1>
+                    <a href="/grocery" class="btn btn-danger  text-uppercase mt-4">Buy Now</a>
+                </div>
+            </div>
+
+            <div class="carousel-item">
+                <img src="/static/images/front4.jpg" class="d-block w-100 carauselImage" alt="..." height="800px">
+                <div class="carousel-caption d-block" style="color: #98d87b;">
+                    <h1>Trending !! 28% Discount</h1>
+                    <a href="/electronics" class="btn btn-danger  text-uppercase mt-4">Buy Now</a>
+                </div>
+            </div>
+            <div class="carousel-item">
+                <img src="/static/images/front5.jpg" class="d-block w-100 carauselImage" alt="..." height="800px">
+                <div class="carousel-caption d-block" style="color: #a7ecf5;">
+                    <h1>Trending !! Get 33% Discount for Fashion</h1>
+                    <a href="/fashion" class="btn btn-danger  text-uppercase mt-4">Buy Now</a>
+                </div>
+            </div>
+        </div>
+        <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleControls" data-bs-slide="prev">
+          <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+          <span class="visually-hidden">Previous</span>
+        </button>
+        <button class="carousel-control-next" type="button" data-bs-target="#carouselExampleControls" data-bs-slide="next">
+          <span class="carousel-control-next-icon" aria-hidden="true"></span>
+          <span class="visually-hidden">Next</span>
+        </button>
+    </div>
+</div>
+
+
+
+{% endblock body %}

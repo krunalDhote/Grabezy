@@ -1,0 +1,189 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+    <title>Grabezy | Login |</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            font-family: sans-serif;
+        }
+        
+        body {
+            background-image: url("/static/images/login.jpg");
+            height: auto;
+            background-color: rgb(255 244 128);
+            /* You must set a specified height */
+            background-position: center;
+            /* Center the image */
+            background-repeat: no-repeat;
+            /* Do not repeat the image */
+            background-size: cover;
+            /* Resize the background image to cover the entire container */
+        }
+        
+        .loginf {
+            height: 100%;
+            width: 100%;
+        }
+        
+        .form {
+            width: 380px;
+            height: 480px;
+            position: relative;
+            margin: 6% auto;
+            background-color: #fff;
+            padding: 5px;
+            overflow: hidden;
+            margin-top: 100px;
+            margin-left: 70px;
+            background-color: transparent;
+        }
+        
+        .button {
+            width: 220px;
+            margin: 35px auto;
+            position: relative;
+            box-shadow: 0 0 20px 9px #24ffda1f;
+            border-radius: 30px;
+        }
+        
+        .toggle {
+            color: rgb(0, 0, 0);
+            padding: 10px 30px;
+            cursor: pointer;
+            background-color: transparent;
+            border: 0;
+            outline: none;
+            position: relative;
+        }
+        
+        #bts {
+            top: 0;
+            left: 0;
+            position: absolute;
+            width: 110px;
+            height: 100%;
+            background: linear-gradient(to right, #ff2323, #e7e430);
+            border-radius: 30px;
+            transition: .5s;
+        }
+        
+        .input_box {
+            position: absolute;
+            width: 280px;
+            transition: .5s;
+        }
+        
+        .input_field {
+            width: 100%;
+            padding: 10px 0;
+            margin: 5px 0;
+            border-left: 0;
+            border-right: 0;
+            border-top: 0;
+            border-bottom: 1px solid #999;
+            outline: none;
+            background: transparent;
+        }
+        
+        .submitbutton {
+            width: 85%;
+            padding: 10px 30px;
+            cursor: pointer;
+            display: block;
+            margin: auto;
+            background: linear-gradient(to right, #ff2323, #e7e430);
+            border: 0;
+            outline: none;
+            border-radius: 30px;
+        }
+        
+        .checkbox {
+            margin: 30px 10px 30px 0;
+        }
+        
+        span {
+            color: #777;
+            font-size: 13px;
+            bottom: 63px;
+            position: absolute;
+        }
+        
+        #login {
+            left: 50px;
+        }
+        
+        #signin {
+            left: 450px;
+        }
+        .usefullinks{
+            margin-top: -65px;
+            margin-right: 20px;
+            text-align: right
+        }
+    </style>
+</head>
+
+<body>
+    <div>
+        <img width="149" height="90" style="margin-top: 10px;" src="/static/images/grabezylogo.png" alt="">
+    </div>
+    <div class="usefullinks">
+        <a href="/about">About Us</a> | <a href="/contact">Contact Us</a><br><br><a href="/termofuse">Term Of Use</a> | <a href="/privacy">Privacy</a> | <a href="/service">Services</a>
+    </div>
+    <div class="loginf">
+        <div class="form">
+            <div class="button">
+                <div id="bts"></div>
+                <button type="button" class="toggle" onclick="login()">Login</button>
+                <button type="button" class="toggle" onclick="signin()">Sign In</button>
+            </div>
+
+            <form id="login" class="input_box" action="/home" method="POST">
+                {% csrf_token %}
+                <input type="text" class="input_field" name="loginusername" placeholder="Username" required>
+                <input type="password" class="input_field" name="loginpass" placeholder="Enter Password" required>
+                <input type="checkbox" class="checkbox"><span>Remember Password</span>
+                <button type="submit" class="submitbutton">Login</button>
+            </form>
+
+            <form id="signin" class="input_box" action="/signup" method="POST">
+                {% csrf_token %}
+                <input type="text" class="input_field" name="username" placeholder="Username" required>
+                <input type="text" class="input_field" name="fname" placeholder="First Name" required>
+                <input type="text" class="input_field" name="lname" placeholder="Last Name" required>
+                <input type="email" class="input_field" name="email" placeholder="Email Id" required>
+                <input type="password" class="input_field" name="password" placeholder="Password" required>
+                <input type="checkbox" class="checkbox" required><span>I agree to the terms and conditions</span>
+                <button type="submit" class="submitbutton">Sign In</button>
+            </form>
+
+        </div>
+    </div>
+    <script>
+        {%if msg|length != 0 %}
+        alert('{{msg}}');
+        window.location.href = "/" {% endif %}
+
+        var x = document.getElementById("login");
+        var y = document.getElementById("signin");
+        var z = document.getElementById("bts");
+
+        function signin() {
+            x.style.left = "-400px";
+            y.style.left = "50px";
+            z.style.left = "110px";
+        }
+
+        function login() {
+            x.style.left = "50px";
+            y.style.left = "450px";
+            z.style.left = "0";
+        }
+    </script>
+
+</body>
+
+</html>

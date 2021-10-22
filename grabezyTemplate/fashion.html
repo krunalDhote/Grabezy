@@ -1,0 +1,106 @@
+{% extends 'basic.html' %} {% block title %} Fashion |{% endblock title %}
+
+
+
+
+</head>
+
+<body>
+
+    {% block body %}
+
+
+    <div align="center" class="container pt-4">
+        <h1 style=" color: rgb(24, 15, 75);font-family:cursive">Everything you need to become stylish is here!</h1>
+
+        <hr style="color: rgb(0, 0, 0);margin-top: 40px;">{% for product,range in allProds %}
+        <span>
+            <button id="btn{{product.0.id}}" class="prodbtns btn m-lg-4 button">{{product.0.catagory}}</button>
+          </span> {% endfor %}
+    </div>
+
+    <!-- Carausel For Products -->
+
+    <div class="container-fluid">
+        <div id="carouselExampleControls" class="carousel slide" data-bs-ride="carousel">
+            <div class="carousel-inner">
+                <div class="carousel-item active">
+                    <img src="https://source.unsplash.com/1600x900/?fashion" class="d-block w-100" alt="...">
+                </div>
+                <div class="carousel-item">
+                    <img src="https://source.unsplash.com/1600x900/?girls,fashion,happy" class="d-block w-100" alt="...">
+                </div>
+                <div class="carousel-item">
+                    <img src="https://source.unsplash.com/1600x900/?stylish,boy" class="d-block w-100" alt="...">
+                </div>
+                <div class="carousel-item">
+                    <img src="https://source.unsplash.com/1600x900/?fashion,boys,tops" class="d-block w-100" alt="...">
+                </div>
+                <div class="carousel-item">
+                    <img src="https://source.unsplash.com/1600x900/?fashion,goggle,bracelate,hodie," class="d-block w-100" alt="...">
+                </div>
+            </div>
+            <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleControls" data-bs-slide="prev">
+              <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+            </button>
+            <button class="carousel-control-next" type="button" data-bs-target="#carouselExampleControls" data-bs-slide="next">
+              <span class="carousel-control-next-icon" aria-hidden="true"></span>
+            </button>
+        </div>
+    </div>
+
+    <div class="grabtext container pt-lg-5 ">
+        <h1 class="text-center" style=" color: rgb(8, 88, 14);font-family:cursive">Grab Here The All Branded Items!</h1>
+        <hr style="color: rgb(0, 0, 0);margin-top: 40px;">
+    </div>
+
+    {% for product,range in allProds %}
+
+    <div id="prod{{product.0.id}}" class="productshidden container pt-lg-5 ">
+        <h1 style="color: rgb(53, 22, 7);font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;">Flash Sell On {{product.0.catagory}} <span><svg xmlns="http://www.w3.org/2000/svg" width="34" height="31" fill="currentColor" class="bi bi-emoji-heart-eyes-fill" viewBox="0 0 16 16">
+            <path d="M8 0a8 8 0 1 0 0 16A8 8 0 0 0 8 0zM4.756 4.566c.763-1.424 4.02-.12.952 3.434-4.496-1.596-2.35-4.298-.952-3.434zm6.559 5.448a.5.5 0 0 1 .548.736A4.498 4.498 0 0 1 7.965 13a4.498 4.498 0 0 1-3.898-2.25.5.5 0 0 1 .548-.736h.005l.017.005.067.015.252.055c.215.046.515.108.857.169.693.124 1.522.242 2.152.242.63 0 1.46-.118 2.152-.242a26.58 26.58 0 0 0 1.109-.224l.067-.015.017-.004.005-.002zm-.07-5.448c1.397-.864 3.543 1.838-.953 3.434-3.067-3.554.19-4.858.952-3.434z"/>
+          </svg></span></h1>
+        <div class="row row-cols-1 row-cols-sm-2 row-cols-md-3 g-3">
+            {% for i in product %}
+            <div class="col p-2">
+                <div class="card shadow-sm">
+                    <a href="/media/{{i.image}}"><img width="300px" height="250px" src="/media/{{i.image}}" class="card-img-top" alt="..."></a>
+                    <div class="card-body">
+                        <div class="row">
+                            <div class="col-6">
+                                <h2 id="namepr{{i.id}}" class="productname">{{i.product_name}}</h2><br>
+                                <h4 class="productprice">₹ <span id="pricepr{{i.id}}">{{i.price}}</span></h4>
+                            </div>
+                            <div class="col">
+                                <div class="Desc">
+                                    <strong><p id="desc{{i.id}}">{{i.desc|slice:"0:60"}}...</p></strong>
+                                </div>
+                                <div class="pt-2 d-flex justify-content-end align-items-center">
+                                    <div class="btn-group">
+                                        <span id="addcart{{i.id}}" class="divpr">
+                                            <button id="cart{{i.id}}" class="cart btn text-black"><i class="fas fa-2x fa-cart-plus"></i></button>
+                                     </span>
+                                        <span><button id="view{{i.id}}" class="view pt-3" type="button" data-bs-toggle="collapse" data-bs-target="#collapse{{i.id}}" aria-expanded="false" aria-controls="collapse{{i.id}}">
+                                        view
+                                      </button></span>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="collapse" id="collapse{{i.id}}">
+                                <div id="desc{{i.id}}" class="card card-body">
+                                    {{i.desc}}
+                                </div>
+                            </div>
+
+                        </div>
+                    </div>
+                </div>
+            </div>
+            {%endfor %}
+
+        </div>
+    </div>{% endfor %}
+
+    <script src="/static/addjs.js"></script>
+    {% endblock body %}

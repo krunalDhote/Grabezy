@@ -1,0 +1,106 @@
+{% extends 'basic.html' %} {% block title %} Cart |{% endblock title %} {% block css %}
+<style>
+    .head {
+        color: rgb(47, 75, 20);
+    }
+    
+    .vl {
+        border-left: 3px solid rgb(165, 25, 25);
+        height: 300px;
+        position: absolute;
+        margin-left: -12px;
+    }
+</style> {% endblock css %} {% block body %}
+
+<div class="container-fluid pt-5">
+    <div class="row text-center">
+        <div class="container col">
+            <h1 style="color: rgb(11, 11, 66)">Electronics</h1>
+            <div class="row pt-4 head">
+                <div class="col">
+                    <h3>Product</h3>
+                </div>
+                <div class="col">
+                    <h3>Price</h3>
+                </div>
+                <div class="col">
+                    <h3>Quantity</h3>
+                </div>
+            </div>
+            <hr style="color: rgb(165, 25, 25);">
+            <div class="row pt-2">
+                <div class="col">
+                    <h6>No Item Selected</h6>
+                </div>
+                <div class="col">
+                    <h6>₹ 0</h6>
+                </div>
+                <div class="col">
+                    <h6>0</h6>
+                </div>
+            </div>
+            <hr style="color: rgb(165, 25, 25);">
+        </div>
+        <div class="container col">
+            <div class="vl"></div>
+            <h1 style="color: rgb(11, 11, 66)">Grocery</h1>
+            <div class=" row pt-4 head ">
+                <div class="col ">
+                    <h3>Product</h3>
+                </div>
+                <div class="col ">
+                    <h3>Price</h3>
+                </div>
+                <div class="col ">
+                    <h3>Quantity</h3>
+                </div>
+            </div>
+            <hr style="color: rgb(165, 25, 25);">
+            <div class="row pt-2">
+                <div class="col">
+                    <h6>No Item Selected</h6>
+                </div>
+                <div class="col">
+                    <h6>₹ 0</h6>
+                </div>
+                <div class="col">
+                    <h6>0</h6>
+                </div>
+            </div>
+            <hr style="color: rgb(165, 25, 25);">
+        </div>
+        <div class="container col ">
+            <div class="vl"></div>
+            <h1 style="color: rgb(11, 11, 66)">Fashion</h1>
+
+            <div class="row pt-4 head">
+                <div class="col">
+                    <h3>Product</h3>
+                </div>
+                <div class="col">
+                    <h3>Price</h3>
+                </div>
+                <div class="col">
+                    <h3>Quantity</h3>
+                </div>
+            </div>
+            <hr style="color: rgb(165, 25, 25);">
+            <div class="row pt-2">
+                <div class="col">
+                    <h6>No Item Selected</h6>
+                </div>
+                <div class="col">
+                    <h6>₹ 0</h6>
+                </div>
+                <div class="col">
+                    <h6>0</h6>
+                </div>
+            </div>
+            <hr style="color: rgb(165, 25, 25);">
+        </div>
+    </div>
+    <div class="allTotal text-center head pt-5">
+        <h1>All Total : Rs. <span>0</span></h1>
+    </div>
+</div>
+{% endblock body %}

@@ -1,0 +1,61 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <!-- Bootstrap CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-F3w7mX95PdgyTmZZMECAngseQB83DfGTowi0iMjiWaeVhAn4FJkqJByhZMI3AhiU" crossorigin="anonymous">
+
+    <title>Grabezy | Privacy |</title>
+    <style>
+        body {
+            background-image: linear-gradient(to right, rgb(255, 249, 172), rgb(255, 255, 255));
+        }
+        
+        .usefullinks {
+            margin-top: -65px;
+            margin-right: 20px;
+            text-align: right
+        }
+    </style>
+</head>
+
+<body>
+    <div>
+        <img width="149" height="90" style="margin-top: 10px;" src="/static/images/grabezylogo.png" alt="">
+    </div>
+    <div class="usefullinks">
+        {% if user.is_authenticated %}<a href="/index">Home</a> |{% endif %}
+        <a href="/about"> About Us</a> | <a href="/contact">Contact Us</a><br><br><a href="/termofuse">Term Of Use</a> | <a href="/privacy">Privacy</a> | <a href="/service">Services</a>
+    </div>
+    <div class="container pt-5">
+        <h2>Privacy</h2><br>
+        <p>We view protection of Your privacy as a very important principle. We understand clearly that You and Your Personal Information is one of Our most important assets. We store and process Your Information including any sensitive financial information
+            collected (as defined under the Information Technology Act, 2000), if any, on computers that may be protected by physical as well as reasonable technological security measures and procedures in accordance with Information Technology Act 2000
+            and Rules there under.Our current Privacy Policy is available at Privacy. Our current Privacy Policy is available at Privacy. f You object to Your Information being transferred or used in this way please do not use Platform.<br><br> If You
+            object to Your Information being transferred or used in this way please do not use Platform. We may share personal information with our other corporate entities and affiliates. These entities and affiliatesmay market to you as a result of
+            such sharing unless you explicitly opt-out.<br><br> We may disclose personal information to third parties. This disclosure may be required for us to provide youaccess to our Services, to comply with our legal obligations, to enforce our User
+            Agreement, to facilitate our marketing and advertising activities, or to prevent, detect, mitigate, and investigate fraudulent or illegal activities related to our Services. We do not disclose your personal information to third parties for
+            their marketing and advertising purposes without your explicit consent.<br><br> We may disclose personal information if required to do so by law or in the good faith belief that such disclosure is reasonably necessary to respond to subpoenas,
+            court orders, or other legal process. We may disclose personal information to law enforcement offices, third party rights owners, or others in the good faith belief that such disclosure is reasonably necessary to: enforce our Terms or Privacy
+            Policy; respond to claims that an advertisement, posting or other content violates the rights of a third party; or protect the rights, property or personal safety of our users or the general public.<br><br> We and our affiliates will share
+            / sell some or all of your personal information with another business entity should we (or our assets) plan to merge with, or be acquired by that business entity, or re-organization, amalgamation, restructuring of business. Should such a transaction
+            occur that other business entity (or the new combined entity) will be required to follow this privacy policy with respect to your personal information.</p>
+    </div>
+    <!-- Optional JavaScript; choose one of the two! -->
+
+    <!-- Option 1: Bootstrap Bundle with Popper -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.1/dist/js/bootstrap.bundle.min.js" integrity="sha384-/bQdsTh/da6pkI1MST/rWKFNjaCP5gBSY4sEBT38Q/9RBh9AH40zEOg7Hlq2THRZ" crossorigin="anonymous"></script>
+
+    <!-- Option 2: Separate Popper and Bootstrap JS -->
+    <!--
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.3/dist/umd/popper.min.js" integrity="sha384-W8fXfP3gkOKtndU4JGtKDvXbO53Wy8SZCQHczT5FMiiqmQfUpWbYdTil/SxwZgAN" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.1/dist/js/bootstrap.min.js" integrity="sha384-skAcpIdS7UcVUC05LJ9Dxay8AXcDYfBJqt1CJ85S/CFujBsIzCIv+l9liuYLaMQ/" crossorigin="anonymous"></script>
+    -->
+
+</body>>
+
+</html>

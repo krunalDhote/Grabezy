@@ -99,5 +99,25 @@
 </div>
 
 
+<script>
+    //for carts
+    //creating cart and operations o=if already created
+    if (localStorage.getItem('cart') == null) {
+        var cart = {}
+    } else {
+        cart = JSON.parse(localStorage.getItem('cart'));
+        updateCart(cart)
+    }
+
+    //update cart value
+    function updateCart(cart) {
+        sum = 0;
+        for (var item in cart) {
+            sum += cart[item][0];
+        }
+        localStorage.setItem('cart', JSON.stringify(cart));
+        $('#cartval').text(sum);
+    }
+</script>
 
 {% endblock body %}

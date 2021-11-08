@@ -1,1 +1,126 @@
-{% extends 'basic.html' %} {% block title %} Checkout |{% endblock title %}
+{% extends 'basic.html' %} {% block title %} Checkout |{% endblock title %} {% block body %}
+<div class="container">
+    <div class="col pt-3">
+
+        <nav id="carttotal" aria-label="breadcrumb">
+            <ol class="breadcrumb mt-3">
+                <b><li class="breadcrumb-item active" aria-current="page">Your Cart Total Is <h3>₹ <span id="totalPrice">0</h3></span>Enter your details below & place your order. Thanks for using Grabezy!</li></b>
+            </ol>
+        </nav>
+
+        <nav aria-label="breadcrumb">
+            <ol id="items" class="breadcrumb mt-3">
+                <!-- we adding here some data -->
+            </ol>
+        </nav>
+
+        <div class="col pt-2">
+            <form class="row g-3" action="/checkout/" method="POST">
+                {%csrf_token%}
+                <input type="hidden" name="items_json" id="items_json">
+                <input type="hidden" name="amount" id="amount">
+                <div class="col-md-6 pt-3">
+                    <label for="inputName4" class="form-label">Name</label>
+                    <input name="name" type="text" class="form-control" id="inputName4" placeholder="Name" required>
+                </div>
+                <div class="col-md-6 pt-3">
+                    <label for="inputEmail4" class="form-label">Email</label>
+                    <input name="email" type="email" class="form-control" id="inputEmail4" placeholder="email" required>
+                </div>
+                <div class="col-md-6 pt-3">
+                    <label for="inputPhonel4" class="form-label">Phone</label>
+                    <input name="phone" type="phone" class="form-control" id="inputPhonel4" placeholder="+91" required>
+                </div>
+                <div class="col-12 pt-3">
+                    <label for="inputAddress1" class="form-label">Address</label>
+                    <input name="address1" type="text" class="form-control" id="inputAddress1" placeholder="1234 Main St" required>
+                </div>
+                <div class="col-12 pt-3">
+                    <label for="inputAddress2" class="form-label">Address Line 2</label>
+                    <input name="address2" type="text" class="form-control" id="inputAddress2" placeholder="Apartment, studio, or floor" required>
+                </div>
+                <div class="col-md-6 pt-3">
+                    <label for="inputCity" class="form-label">City</label>
+                    <input name="city" type="text" class="form-control" id="inputCity" required>
+                </div>
+                <div class="col-md-3 pt-3">
+                    <label for="validationCustom05" class="form-label">Pin-Code</label>
+                    <input name="pincode" type="text" class="form-control" id="validationCustom05" required>
+                    <div class="invalid-feedback">
+                        Please provide a valid pin-code.
+                    </div>
+                </div>
+                <div class="col-md-6 pt-3">
+                    <label for="inputState" class="form-label">State</label>
+                    <input name="state" type="text" class="form-control" id="inputState" required>
+                </div>
+                <div class="col-12">
+                    <div class="form-check">
+                        <input class="form-check-input" type="checkbox" id="gridCheck" required>
+                        <label class="form-check-label" for="gridCheck">
+                      Check me out
+                    </label>
+                    </div>
+                </div>
+                <div id="place" class="col-12 pt-3">
+                    <button id="placeorder" type="submit" class="btn btn-success">Place Order</button>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+<script>
+    //for carts
+    //creating cart and operations o=if already created
+    if (localStorage.getItem('cart') == null) {
+        var cart = {}
+    } else {
+        cart = JSON.parse(localStorage.getItem('cart'));
+        updateCart(cart)
+    }
+
+    //update cart value
+    function updateCart(cart) {
+        sum = 0;
+        for (var item in cart) {
+            sum += cart[item][0];
+        }
+        localStorage.setItem('cart', JSON.stringify(cart));
+        $('#cartval').text(sum);
+    }
+
+    //filling cart
+    var additem = "";
+    var sum = 0;
+    var totalPrice = 0;
+    var itemPrice = 0;
+    if ($.isEmptyObject(cart)) {
+        //if object is empty
+        additem = `<b><li class="breadcrumb-item active" aria-current="page">Your Cart Is Empty, Please add some item and checkout here! By entering your details below & place your order. Thanks for using Grabezy!</li></b>`
+        $('#items').append(additem);
+        $('#carttotal').hide();
+        $('#place').html("<a href='/index' class='btn btn-primary'>Go To Home >></a>");
+    } else {
+        for (var item in cart) {
+            let name = cart[item][1];
+            let qty = cart[item][0];
+            let itemPrice = cart[item][2];
+            sum += qty;
+            totalPrice = totalPrice + qty * itemPrice;
+            $('#totalPrice').text(totalPrice);
+            $('#amount').val(totalPrice);
+        }
+    }
+
+    {% if thank %}
+    localStorage.clear();
+    //  alert('Thanks for ordering with us. Your order id is {{id}}. Use to track your order!');
+    // document.location = "/index"; 
+    additem = `<b><li class="breadcrumb-item active" aria-current="page">Your Cart Is Empty, Please add some item and checkout here! By entering your details below & place your order. Thanks for using Grabezy!</li></b>`
+    $('#items').append(additem);
+    $('#carttotal').hide();
+    $('#place').html("<a href='/index' class='btn btn-primary'>Go To Home >></a>"); {% endif %}
+    $('#items_json').val(JSON.stringify(cart));
+</script>
+
+{% endblock body %}

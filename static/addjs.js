@@ -19,10 +19,20 @@ if (localStorage.getItem('cart') == null) {
     var cart = {}
 } else {
     cart = JSON.parse(localStorage.getItem('cart'));
-    // updateCart(cart)
+    updateCart(cart);
 }
 
-
+//update cart value
+function updateCart(cart) {
+    sum = 0;
+    for (var item in cart) {
+        sum += cart[item][0];
+        $('#addcart' + item).html("<button id='minus" + item + "'class='minus'>-</button> <span id='val" + item + "''>" +
+            cart[item][0] + "</span> <button id='plus" + item + "' class='plus'> + </button>");
+    }
+    localStorage.setItem('cart', JSON.stringify(cart));
+    $('#cartval').text(sum);
+}
 
 $(document).ready(function() {
     //adding item in cart
@@ -39,21 +49,8 @@ $(document).ready(function() {
         updateCart(cart) //update cart value if we adding item
     });
 
-    //update cart value
-    function updateCart(cart) {
-        sum = 0;
-        for (var item in cart) {
-            sum += cart[item][0];
-            $('#addcart' + item).html("<button id='minus" + item + "'class='minus'>-</button> <span id='val" + item + "''>" +
-                cart[item][0] + "</span> <button id='plus" + item + "' class='plus'> + </button>");
-        }
-        localStorage.setItem('cart', JSON.stringify(cart));
-        $('#cartval').text(sum);
-    }
-
 
     //plus minus button oprations
-
     $('.divpr').on('click', 'button.minus', function() {
         a = this.id.slice(5, ); //it take id number only and left the text 'minus'
         cart[a][0] = cart[a][0] - 1
@@ -73,6 +70,5 @@ $(document).ready(function() {
         $('#val' + a).text(cart[a][0])
         updateCart(cart)
     });
-
 
 });

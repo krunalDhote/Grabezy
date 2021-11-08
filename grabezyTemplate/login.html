@@ -118,7 +118,8 @@
         #signin {
             left: 450px;
         }
-        .usefullinks{
+        
+        .usefullinks {
             margin-top: -65px;
             margin-right: 20px;
             text-align: right
@@ -163,7 +164,7 @@
         </div>
     </div>
     <script>
-        {%if msg|length != 0 %}
+        {% if msg|length != 0 %}
         alert('{{msg}}');
         window.location.href = "/" {% endif %}
 

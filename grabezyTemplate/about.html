@@ -1,30 +1,142 @@
-<!doctype html>
-<html lang="en">
+{% extends 'basic.html' %} {% block title %} About Us |{% endblock title %} {% block css %}
+<style>
+    h1,
+    h2 {
+        color: rgb(11, 11, 66);
+    }
+    
+    h3 {
+        color: rgb(0, 136, 113);
+    }
+    
+    @media screen and (max-width: 700px) {
+        .About {
+            height: 300x;
+            width: 300px;
+        }
+    }
+</style>
+{% endblock css %} {% block body %}
+<div class="container">
+    <div class="pt-5 marketing">
+        <div class="row featurette">
+            <div class="col-md-7">
+                <h2 class="featurette-heading">What Is Grabezy? <span class="text-muted">Short DIscription!</span></h2>
+                <p class="lead pt-2">Grabezy is an easy to-use, powerful, Open Site online store management that can sell multiple online products from a single cart. Customer are simply by filling in forms and checking out and by paying amount can order various products
+                    from Grabezy. There are many professionally catagory available to customize the cart to your needs. An Grabezy store can be ready to take orders soon after checking out. All you have to order is have it available for you, select a
+                    producct from the many catagory and order from the site, and your product descriptions and photos, click a few settings, and you are ready to begin accepting orders. Our free delivery & Quick Start chapters show you how. The public
+                    side or “Storefront” of Grabezy looks very professional and ready to sell almost as soon as it is ordered.</p>
+            </div>
+            <div class="col-md-5">
+                <img class="About" height='400' width="500" src="/static/images/grabezy.jpg" alt="">
 
-<head>
-    <!-- Required meta tags -->
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
+            </div>
+        </div>
+        <br>
+        <hr class="featurette-divider">
+        <br>
+        <div class="row featurette">
+            <div class="col-md-7 order-md-2">
+                <h2 class="featurette-heading">Why Grabezy?
+                    <p class="lead pt-2">Its awesomely glad to make our dream mission into picture. Since its inception we placed our immediate preference to be around our beloved clients. We had often been wandering around that how can we bring distinct variety of grosseries,
+                        electronics and specially fashionable items into a single cart. In this 21st century its all about possible because of this digital platform. Our team leader, subleader and entire team struggled a lot to make it possible. Our mission
+                        is to make our every single client highly satisfied. Your satisfaction is our priority. Thanks to every one who has been the part of this ecosysteam.</p>
+            </div>
+            <div class="col-md-5 order-md-1">
 
-    <!-- Bootstrap CSS -->
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-F3w7mX95PdgyTmZZMECAngseQB83DfGTowi0iMjiWaeVhAn4FJkqJByhZMI3AhiU" crossorigin="anonymous">
+                <iframe class="About" src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3725.121696103694!2d77.75543056424455!3d20.98775834455424!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3bd6a2d15d81f4cd%3A0x703a9debc9500a6b!2sP.%20R.%20Pote%20Patil%20College%20of%20Engineering%20and%20Management!5e0!3m2!1sen!2sin!4v1635830032659!5m2!1sen!2sin"
+                    width="450" height="300" style="border:0;" allowfullscreen="" loading="lazy"></iframe>
 
-    <title>About</title>
-</head>
 
-<body>
-    <h1>Hello, world!</h1>
+            </div>
+        </div>
+        <!-- /END THE FEATURETTES -->
+    </div>
 
-    <!-- Optional JavaScript; choose one of the two! -->
 
-    <!-- Option 1: Bootstrap Bundle with Popper -->
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.1/dist/js/bootstrap.bundle.min.js" integrity="sha384-/bQdsTh/da6pkI1MST/rWKFNjaCP5gBSY4sEBT38Q/9RBh9AH40zEOg7Hlq2THRZ" crossorigin="anonymous"></script>
+    <!-- Three columns of text below the carousel -->
+    <div class="row pt-5 text-center">
+        <h1 class="text-center pt-5">Our Team</h2>
+            <div class="mt-lg-5">
+                <img class="rounded-circle" src="/static/images/Team/Sir.jpeg" width="250" height="250" alt="">
+                <h3 class="pt-3">Prof. Akhilesh Tayede</h3>
+                <h5 class="text-muted">Guide</h5>
+            </div>
+    </div>
 
-    <!-- Option 2: Separate Popper and Bootstrap JS -->
-    <!--
-    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.3/dist/umd/popper.min.js" integrity="sha384-W8fXfP3gkOKtndU4JGtKDvXbO53Wy8SZCQHczT5FMiiqmQfUpWbYdTil/SxwZgAN" crossorigin="anonymous"></script>
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.1/dist/js/bootstrap.min.js" integrity="sha384-skAcpIdS7UcVUC05LJ9Dxay8AXcDYfBJqt1CJ85S/CFujBsIzCIv+l9liuYLaMQ/" crossorigin="anonymous"></script>
-    -->
-</body>
+    <div class="row pt-5 text-center">
+        <div class="col mt-lg-5">
+            <img class="rounded-circle" src="/static/images/Team/Roshan Dabhade.jpg" width="240" height="240" alt="">
+            <h3 class="pt-3">Roshan Dabhade</h3>
+            <h5 class="text-muted">Leader</h5>
+        </div>
+        <div class="col mt-lg-5">
+            <img class="rounded-circle" src="/static/images/Team/Krunal Dhote.jpg" width="240" height="240" alt="">
+            <h3 class="pt-3">Krunal Dhote</h3>
+            <h5 class="text-muted">Sub-Leader</h5>
+        </div>
+    </div>
+</div>
 
-</html>
+<div class="container-fluid">
+    <div class=" row pt-5 text-center">
+        <div class="col mt-lg-5">
+            <img class="rounded-circle" src="/static/images/Team/Upasti Kawale.jpg" width="225" height="225" alt="">
+            <h3 class="pt-3">Upasti Kawale</h3>
+        </div>
+        <div class="col mt-lg-5">
+            <img class="rounded-circle" src="/static/images/Team/Avinash Chawhan.jpeg" width="225" height="225" alt="">
+            <h3 class="pt-3">Avinash Chauhan</h3>
+        </div>
+        <div class="col mt-lg-5">
+            <img class="rounded-circle" src="/static/images/Team/Sakshi Durge.JPG" width="225" height="225" alt="">
+            <h3 class="pt-3">Sakshi Durge</h3>
+        </div>
+    </div>
+
+    <div class=" row pt-5 text-center">
+        <div class="col mt-lg-5">
+            <img class="rounded-circle" src="/static/images/Team/Tushar Talhande.jpg" width="225" height="225" alt="">
+            <h3 class="pt-3">Tushar Talhande</h3>
+        </div>
+        <div class="col mt-lg-5">
+            <img class="rounded-circle" src="/static/images/Team/Rahul Virghat.png" width="225" height="225" alt="">
+            <h3 class="pt-3">Rahul Virghat</h3>
+        </div>
+        <div class="col mt-lg-5">
+            <img class="rounded-circle" src="/static/images/Team/Akshay Dhanorkar.jpeg" width="225" height="225" alt="">
+            <h3 class="pt-3">Akshay Dhanorkarr</h3>
+        </div>
+
+
+    </div>
+
+    <div class=" row pt-5 text-center">
+        <div class="col mt-lg-5">
+            <img class="rounded-circle" src="/static/images/Team/Samiksha Gawande.jpeg" width="225" height="225" alt="">
+            <h3 class="pt-3">Samiksha Gawande</h3>
+        </div>
+        <div class="col mt-lg-5">
+            <img class="rounded-circle" src="/static/images/Team/Kaustubh Kulakarni.jpg" width="225" height="225" alt="">
+            <h3 class="pt-3">Kaustubh Kulakarni</h3>
+        </div>
+        <div class="col mt-lg-5">
+            <img class="rounded-circle" src="/static/images/Team/Vedant Pawar.jpeg" width="225" height="225" alt="">
+            <h3 class="pt-3">Vedant Pawar</h3>
+        </div>
+    </div>
+</div>
+<!-- /.row -->
+<br><br>
+<div class="container mt-lg-5">
+    <h1>Feedback</h1>
+    <div class="mb-3v mt-lg-3">
+        <form action="/about/" method="post">
+            {% csrf_token %}
+            <textarea style="border-radius: 18px;border-color: rgb(11, 11, 66);" name="feedback" class="form-control bg-transparent" id="feedback" rows="7" placeholder="Your Feedback Is Very Important For Us..."></textarea>
+            <button type="submit" class="btn btn-primary rounded-pill mt-3">Submit</button>
+        </form>
+    </div>
+</div>
+
+{% endblock body %}

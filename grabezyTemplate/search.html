@@ -1,127 +1,125 @@
-{% extends 'basic.html' %} {% block title %} Search |{% endblock title %} 
+{% extends 'basic.html' %} {% block title %} Search |{% endblock title %}
 
 <body>
- {% block body %}
- <div class="container my-3">
-    <h2>Search Result:</h2>
-{% if allProds|length == 0 %}
-<p>Your search - {{query}} - did not match any documents.</p>
-<ul>
-<li>Make sure that all words are spelled correctly.</li>
-<li>Try different keywords.</li>
-<li>Try more general keywords.</li>
-</ul>
-{% endif %}
-     {% for product,range in allProds %}
+    {% block body %}
+    <div class="container my-3">
+        <h2>Search Result:</h2>
+        {% if allProds|length == 0 %}
+        <p>Your search - {{query}} - did not match any documents.</p>
+        <ul>
+            <li>Make sure that all words are spelled correctly.</li>
+            <li>Try different keywords.</li>
+            <li>Try more general keywords.</li>
+        </ul>
+        {% endif %} {% for product,range in allProds %}
 
-    <div id="prod{{product.0.id}}" class="productshidden container pt-lg-5 ">
-        <div class="row row-cols-1 row-cols-sm-2 row-cols-md-3 g-3">
-            {% for i in product %}
-            <div class="col p-2">
-                <div class="card shadow-sm">
-                    <a href="/media/{{i.image}}"><img width="300px" height="250px" src="/media/{{i.image}}" class="card-img-top" alt="..."></a>
-                    <div class="card-body">
-                        <div class="row">
-                            <div class="col-6">
-                                <h2 id="namepr{{i.id}}" class="productname">{{i.product_name}}</h2><br>
-                                <h4 class="productprice">₹ <span id="pricepr{{i.id}}">{{i.price}}</span></h4>
-                            </div>
-                            <div class="col">
-                                <div class="Desc">
-                                    <strong><p id="desc{{i.id}}">{{i.desc|slice:"0:60"}}...</p></strong>
+        <div id="prod{{product.0.id}}" class="productshidden container pt-lg-5 ">
+            <div class="row row-cols-1 row-cols-sm-2 row-cols-md-3 g-3">
+                {% for i in product %}
+                <div class="col p-2">
+                    <div class="card shadow-sm">
+                        <a href="/media/{{i.image}}"><img width="300px" height="250px" src="/media/{{i.image}}" class="card-img-top" alt="..."></a>
+                        <div class="card-body">
+                            <div class="row">
+                                <div class="col-6">
+                                    <h2 id="namepr{{i.id}}" class="productname">{{i.product_name}}</h2><br>
+                                    <h4 class="productprice">₹ <span id="pricepr{{i.id}}">{{i.price}}</span></h4>
                                 </div>
-                                <div class="pt-2 d-flex justify-content-end align-items-center">
-                                    <div class="btn-group">
-                                        <span id="addcart{{i.id}}" class="divpr">
+                                <div class="col">
+                                    <div class="Desc">
+                                        <strong><p id="desc{{i.id}}">{{i.desc|slice:"0:60"}}...</p></strong>
+                                    </div>
+                                    <div class="pt-2 d-flex justify-content-end align-items-center">
+                                        <div class="btn-group">
+                                            <span id="addcart{{i.id}}" class="divpr">
                                             <button id="cart{{i.id}}" class="cart btn text-black"><i class="fas fa-2x fa-cart-plus"></i></button>
                                      </span>
-                                        <span><button id="view{{i.id}}" class="view pt-3" type="button" data-bs-toggle="collapse" data-bs-target="#collapse{{i.id}}" aria-expanded="false" aria-controls="collapse{{i.id}}">
+                                            <span><button id="view{{i.id}}" class="view pt-3" type="button" data-bs-toggle="collapse" data-bs-target="#collapse{{i.id}}" aria-expanded="false" aria-controls="collapse{{i.id}}">
                                         view
                                       </button></span>
+                                        </div>
                                     </div>
                                 </div>
-                            </div>
 
-                            <div class="collapse" id="collapse{{i.id}}">
-                                <div id="" class="card card-body">
-                                    {{i.desc}}
+                                <div class="collapse" id="collapse{{i.id}}">
+                                    <div id="" class="card card-body">
+                                        {{i.desc}}
+                                    </div>
                                 </div>
-                            </div>
 
+                            </div>
                         </div>
                     </div>
                 </div>
+                {%endfor %}
+
             </div>
-            {%endfor %}
-
-        </div>
-    </div>{% endfor %}
-
- <script type ="text/javascript">
- 
-//for carts
-//creating cart and operations o=if already created
-if (localStorage.getItem('cart') == null) {
-    var cart = {}
-} else {
-    cart = JSON.parse(localStorage.getItem('cart'));
-    // updateCart(cart)
-}
-
-
-
-$(document).ready(function() {
-    //adding item in cart
-    $('.divpr').on('click', 'button.cart', function() {
-        var idstr = this.id.slice(4, );
-        if (cart[idstr] != undefined) { //if not undefined means added already
-            qty = cart[idstr][0]++;
+        </div>{% endfor %}
+    </div>
+    <script type="text/javascript">
+        //for carts
+        //creating cart and operations o=if already created
+        if (localStorage.getItem('cart') == null) {
+            var cart = {}
         } else {
-            qty = 1;
-            name = $('#namepr' + idstr).text();
-            price = $('#pricepr' + idstr).text();
-            cart[idstr] = [qty, name, parseInt(price)]; //save in localstorage
+            cart = JSON.parse(localStorage.getItem('cart'));
+            // updateCart(cart)
         }
-        updateCart(cart) //update cart value if we adding item
-    });
-
-    //update cart value
-    function updateCart(cart) {
-        sum = 0;
-        for (var item in cart) {
-            sum += cart[item][0];
-            $('#addcart' + item).html("<button id='minus" + item + "'class='minus'>-</button> <span id='val" + item + "''>" +
-                cart[item][0] + "</span> <button id='plus" + item + "' class='plus'> + </button>");
-        }
-        localStorage.setItem('cart', JSON.stringify(cart));
-        $('#cartval').text(sum);
-    }
 
 
-    //plus minus button oprations
 
-    $('.divpr').on('click', 'button.minus', function() {
-        a = this.id.slice(5, ); //it take id number only and left the text 'minus'
-        cart[a][0] = cart[a][0] - 1
-        cart[a][0] = Math.max(0, cart[a][0])
-            //if item is zero
-        if (cart[a][0] == 0) {
-            $('#addcart' + a).html('<button id="cart' + a + '" class="cart btn text-black"><i class="fas fa-2x fa-cart-plus"></i></button>');
-            delete cart[a];
-        } else {
-            $('#val' + a).text(cart[a][0])
-        }
-        updateCart(cart)
-    });
-    $('.divpr').on('click', 'button.plus', function() {
-        a = this.id.slice(4, ); //it take id number only and left the text 'minus'
-        cart[a][0] = cart[a][0] + 1
-        $('#val' + a).text(cart[a][0])
-        updateCart(cart)
-    });
+        $(document).ready(function() {
+            //adding item in cart
+            $('.divpr').on('click', 'button.cart', function() {
+                var idstr = this.id.slice(4, );
+                if (cart[idstr] != undefined) { //if not undefined means added already
+                    qty = cart[idstr][0]++;
+                } else {
+                    qty = 1;
+                    name = $('#namepr' + idstr).text();
+                    price = $('#pricepr' + idstr).text();
+                    cart[idstr] = [qty, name, parseInt(price)]; //save in localstorage
+                }
+                updateCart(cart) //update cart value if we adding item
+            });
+
+            //update cart value
+            function updateCart(cart) {
+                sum = 0;
+                for (var item in cart) {
+                    sum += cart[item][0];
+                    $('#addcart' + item).html("<button id='minus" + item + "'class='minus'>-</button> <span id='val" + item + "''>" +
+                        cart[item][0] + "</span> <button id='plus" + item + "' class='plus'> + </button>");
+                }
+                localStorage.setItem('cart', JSON.stringify(cart));
+                $('#cartval').text(sum);
+            }
 
 
-});
-</script>
+            //plus minus button oprations
+
+            $('.divpr').on('click', 'button.minus', function() {
+                a = this.id.slice(5, ); //it take id number only and left the text 'minus'
+                cart[a][0] = cart[a][0] - 1
+                cart[a][0] = Math.max(0, cart[a][0])
+                    //if item is zero
+                if (cart[a][0] == 0) {
+                    $('#addcart' + a).html('<button id="cart' + a + '" class="cart btn text-black"><i class="fas fa-2x fa-cart-plus"></i></button>');
+                    delete cart[a];
+                } else {
+                    $('#val' + a).text(cart[a][0])
+                }
+                updateCart(cart)
+            });
+            $('.divpr').on('click', 'button.plus', function() {
+                a = this.id.slice(4, ); //it take id number only and left the text 'minus'
+                cart[a][0] = cart[a][0] + 1
+                $('#val' + a).text(cart[a][0])
+                updateCart(cart)
+            });
+
+
+        });
+    </script>
 
     {% endblock body %}

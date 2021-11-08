@@ -1,14 +1,18 @@
 from django.http.response import HttpResponse
 from django.shortcuts import render,redirect
-from .models import Contact,Electronic,Grocery,Fashion
+from .models import Contact,Electronic,Grocery,Fashion,Order,OrderUpdate,Feedback
 from django.contrib import messages
 from django.contrib.auth.models import User
 from django.contrib.auth import authenticate,login,logout
 from django.contrib.auth.decorators import login_required
-
-
-
-
+from grabezy_app import models
+from html.parser import HTMLParser
+import json
+from django.views.decorators.csrf import csrf_exempt
+from Grabezy.settings import EMAIL_HOST_USER, RAZORPAY_API_KEY,RAZORPAY_API_SECRET_KEY
+import razorpay
+from django.core.mail import send_mail
+client = razorpay.Client(auth=(RAZORPAY_API_KEY, RAZORPAY_API_SECRET_KEY))
 # Create your views here.
 
 #Outer Pages
@@ -16,6 +20,12 @@ def entry(request):
     return render(request,'login.html')
 
 def about(request):
+    if request.method=="POST":
+        username=request.user
+        feedback=request.POST['feedback']
+        feedBack=Feedback(username=username,feedback=feedback)
+        feedBack.save()
+        messages.success(request,'We Are Thankfull For Your Feedback')
     return render(request,'about.html')
 
 def contact(request):
@@ -64,7 +74,7 @@ def search(request):
         allProdsEcat=Electronic.objects.filter(catagory__icontains=query)
         allProdsGcat=Grocery.objects.filter(catagory__icontains=query)
 
-        Products=allProdsFname.union(allProdsFname,allProdsEname,allProdsFcat,allProdsEcat)
+        Products=allProdsFname.union(allProdsFname,allProdsEname,allProdsFcat,allProdsEcat,allProdsGname,allProdsGcat)
         n=len(Products)
         allProds.append([Products,range(1,n)])
     if len(Products)==0:
@@ -79,12 +89,64 @@ def cart(request):
 
 @login_required(login_url='/')
 def checkout(request):
+    if request.method=="POST":
+        items_json=request.POST.get('items_json','')
+        name=request.POST.get('name','')
+        amount=int(request.POST.get('amount',))*100
+        email=request.POST.get('email','')
+        phone=request.POST.get('phone','')
+        address=request.POST.get('address1','')+" "+request.POST.get('address2','')
+        city=request.POST.get('city','')
+        pincode=request.POST.get('pincode','')
+        state=request.POST.get('state','')
+
+        if amount<49900:
+            messages.error(request,"Sorry We Can't Get The Order Below Than ₹ 499 ")
+        else:
+            DATA = {
+            "amount":amount,
+            "currency": "INR",
+            "receipt": "receipt#1",
+            "payment_capture":'1'
+            }
+            payment = client.order.create(data=DATA) 
+            context={
+            "name":name,
+            "contact":phone,
+            "email":email,
+            "address":address,
+            "amount": amount/100,
+            }
+            order=Order(items_json=items_json,name=name,email=email,phone=phone,address=address,city=city,pincode=pincode,state=state,amount=amount/100)
+            order.save()
+            update=OrderUpdate(order_id=order.order_id,update_desc="The Order Has Been Placed.")
+            update.save()
+            checkout.oid=order.order_id
+            checkout.mail=email
+            thank=True
+            return render(request,'handlepay.html',{'payment':payment,'context':context,'thank':thank,'oid':checkout.oid}) 
     return render(request,'checkout.html')
 
 @login_required(login_url='/')
 def tracker(request):
+    if request.method=="POST":
+        orderId=request.POST.get('orderId','')
+        email=request.POST.get('email','')
+        try:
+            order=Order.objects.filter(order_id=orderId,email=email)
+            if len(order)>0:
+                update=OrderUpdate.objects.filter(order_id=orderId)
+                updates=[]
+                for item in update:
+                    updates.append({'text':item.update_desc,'time':item.timestamp})
+                    response=json.dumps({"status":"success","updates":updates,"items_json":order[0].items_json},default=str)
+                return HttpResponse(response)
+            else:
+                return HttpResponse('{"status":"no item"}')  #searching item not found
+        except Exception as e:
+            return HttpResponse('{"status":"error"}')
     return render(request,'tracker.html')
-
+    
 #Product Pages
 @login_required(login_url='/')
 def electronics(request):
@@ -101,7 +163,15 @@ def electronics(request):
 
 @login_required(login_url='/')
 def grocery(request):
-    return render(request,'grocery.html')
+    allProds=[]
+    catprod=Grocery.objects.values('catagory','id')
+    cats={item['catagory'] for item in catprod}
+    for cat in cats:
+        prod=Grocery.objects.filter(catagory=cat)
+        n=len(prod)
+        allProds.append([prod,range(1,n)])
+    params={'allProds':allProds}
+    return render(request,'grocery.html',params)
 
 @login_required(login_url='/')
 def fashion(request):
@@ -165,4 +235,10 @@ def handlelogout(request):
 @login_required(login_url='/') 
 def profile(request):
     return render(request,'profile.html')
+
+@csrf_exempt
+def success(request):
+    param={'oid':checkout.oid}
+    send_mail('Mail From Grabezy', 'Your order has been plased and your order id is'+str(checkout.oid) +', Use to track your order. Thanks for ordering from us!',EMAIL_HOST_USER, [checkout.mail])
+    return render(request,'paymentstatus.html',param)
 

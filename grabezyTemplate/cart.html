@@ -79,6 +79,7 @@
             let qty = cart[item][0];
             let itemPrice = cart[item][2];
             sum += qty;
+            console.log(sum)
             totalPrice = totalPrice + qty * itemPrice;
             additem = `<h6 id="myitem${item}" class="row"><li class=" d-flex">
                    <span class="col-4">${name}</span><span class="col-4">₹ ${itemPrice}</span>

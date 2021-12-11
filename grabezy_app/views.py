@@ -6,7 +6,6 @@ from django.contrib.auth.models import User
 from django.contrib.auth import authenticate,login,logout
 from django.contrib.auth.decorators import login_required
 from grabezy_app import models
-from html.parser import HTMLParser
 import json
 from django.views.decorators.csrf import csrf_exempt
 from Grabezy.settings import EMAIL_HOST_USER, RAZORPAY_API_KEY,RAZORPAY_API_SECRET_KEY
@@ -239,6 +238,6 @@ def profile(request):
 @csrf_exempt
 def success(request):
     param={'oid':checkout.oid}
-    send_mail('Mail From Grabezy', 'Your order has been plased and your order id is'+str(checkout.oid) +', Use to track your order. Thanks for ordering from us!',EMAIL_HOST_USER, [checkout.mail])
+    send_mail('Mail From Grabezy', 'Your order has been placed and your order id is'+str(checkout.oid) +', Use to track your order. Thanks for ordering from us!',EMAIL_HOST_USER, [checkout.mail])
     return render(request,'paymentstatus.html',param)
 
